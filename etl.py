@@ -10,42 +10,62 @@ from queries import *
 from cassandra.cluster import Cluster
 
 
-def insert_query1_data(session, data_filepath):
+def insert_song_info_by_session_data(session, data_filepath):
     """
-        Reads new events data file and inserts to raleted table(music_app_history1) with given session for select_query_1. 
+        Reads new events data file and inserts to raleted table(song_info_by_session) with given session for 
+        select_song_info_by_session. 
     """
     try:
-        # read unified event data file and insert to music_app_history1
+        # read unified event data file and insert to song_info_by_session
         with open(data_filepath, encoding = 'utf8') as f:
             csvreader = csv.reader(f)
             next(csvreader) # skip header
             i = 1
             for line in csvreader:
-                session.execute(insert_query_1, (line[0], int(line[4]), float(line[5]), int(line[8]), line[9]))
-                print("inserting to music_app_history1. row number is {}".format(i))
+                session.execute(insert_song_info_by_session, (int(line[8]), int(line[4]), line[0], float(line[5]), line[9]))
+                print("inserting to song_info_by_session. row number is {}".format(i))
                 i += 1
     except Exception as e:
-        print("music_app_history1 Record Insert Error for {}!".format(data_filepath))
+        print("song_info_by_session Record Insert Error for {}!".format(data_filepath))
         raise e
 
-def insert_query2_3_data(session, data_filepath):
+def insert_song_info_by_user_data(session, data_filepath):
     """
-        Reads new events data file and inserts to raleted table(music_app_history2) with given session 
-        for select_query_2 and select_query_3. 
+        Reads new events data file and inserts to raleted table(song_info_by_user) with given session 
+        for select_song_info_by_user. 
     """
     try:
-        # read unified event data file and insert to music_app_history1
+        # read unified event data file and insert to song_info_by_user
         with open(data_filepath, encoding = 'utf8') as f:
             csvreader = csv.reader(f)
             next(csvreader) # skip header
             i = 1
             for line in csvreader:
-                session.execute(insert_query_2_3, (line[0], line[1], line[2], int(line[4]),\
-                                                   int(line[8]), line[9], int(line[10])))
-                print("inserting to music_app_history2. row number is {}".format(i))
+                session.execute(insert_song_info_by_user, (int(line[10]), int(line[8]), int(line[4]), line[0], \
+                                                   line[1], line[2], line[9]))
+                print("inserting to song_info_by_user. row number is {}".format(i))
                 i += 1
     except Exception as e:
-        print("music_app_history1 Record Insert Error for {}!".format(data_filepath))
+        print("song_info_by_user Record Insert Error for {}!".format(data_filepath))
+        raise e
+
+def insert_user_info_by_song_data(session, data_filepath):
+    """
+        Reads new events data file and inserts to raleted table(user_info_by_song) with given session for select_user_info_by_song. 
+    """
+    try:
+        # read unified event data file and insert to user_info_by_song
+        with open(data_filepath, encoding = 'utf8') as f:
+            csvreader = csv.reader(f)
+            next(csvreader) # skip header
+            i = 1
+            for line in csvreader:
+                session.execute(insert_user_info_by_song, (line[9], int(line[10]), int(line[8]), int(line[4]), \
+                                                   line[1], line[2]))
+                print("inserting to user_info_by_song. row number is {}".format(i))
+                i += 1
+    except Exception as e:
+        print("user_info_by_song Record Insert Error for {}!".format(data_filepath))
         raise e
 
 def pre_process_data(session, data_filepath, new_file_name):
@@ -128,8 +148,9 @@ def main():
         unified_event_data_file = 'event_datafile_new.csv'
 
         pre_process_data(session, data_filepath='/event_data', new_file_name=unified_event_data_file)
-        insert_query1_data(session, data_filepath=unified_event_data_file)
-        insert_query2_3_data(session, data_filepath=unified_event_data_file)        
+        insert_song_info_by_session_data(session, data_filepath=unified_event_data_file)
+        insert_song_info_by_user_data(session, data_filepath=unified_event_data_file)        
+        insert_user_info_by_song_data(session, data_filepath=unified_event_data_file)        
     except Exception as e:
         print(e)
     finally:
