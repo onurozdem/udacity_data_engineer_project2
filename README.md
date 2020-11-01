@@ -30,6 +30,30 @@ song_info_by_user table design for questions 2:
 user_info_by_song table design for questions 3:
 	> ![user_info_by_song](images/music_app_history3.PNG)
 
+## Queries
+The queries that meet the questions are as follows:
+
+  > #### 1. Give the artist, song title and song's length in the music app history that was heard during  sessionId = 338, and itemInSession  = 4
+  SELECT artist, 
+         song_title, 
+         length 
+    FROM song_info_by_session 
+    WHERE session_id = 338 AND
+          item_in_session = 4
+  > #### 2. Give only the following: name of artist, song (sorted by itemInSession) and user (first and last name) for userid = 10, sessionid = 182
+  SELECT artist, 
+         song_title, 
+         first_name, 
+         last_name 
+    FROM song_info_by_user 
+    WHERE user_id = 10 AND 
+          session_id = 182
+  > #### 3. Give every user name (first and last) in my music app history who listened to the song 'All Hands Against His Own'
+  SELECT first_name, 
+         last_name 
+    FROM user_info_by_song 
+    WHERE song_title = 'All Hands Against His Own'
+
 ## ETL Pipeline
 Scripts were created and added to the queries.py file to create table, insert data and delete table.
 
