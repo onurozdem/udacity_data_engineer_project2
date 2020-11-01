@@ -60,8 +60,7 @@ def insert_user_info_by_song_data(session, data_filepath):
             next(csvreader) # skip header
             i = 1
             for line in csvreader:
-                session.execute(insert_user_info_by_song, (line[9], int(line[10]), int(line[8]), int(line[4]), \
-                                                   line[1], line[2]))
+                session.execute(insert_user_info_by_song, (line[9], int(line[10]), line[1], line[2]))
                 print("inserting to user_info_by_song. row number is {}".format(i))
                 i += 1
     except Exception as e:
