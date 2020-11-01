@@ -19,14 +19,16 @@ A data model was created to answer the following questions from above data.
   > #### 2. Give only the following: name of artist, song (sorted by itemInSession) and user (first and last name) for userid = 10, sessionid = 182
   > #### 3. Give every user name (first and last) in my music app history who listened to the song 'All Hands Against His Own'
 
-Based on these questions, 2 tables were created. It was designed to meet the answers of the 2nd and 3rd questions in a single table. Because, both of two question have the same key structure.
+Based on these questions, 3 tables were created. Each question have a table.
 
-music_app_history1 table design for question 1:
-	> ![music_app_history1](images/music_app_history1.PNG)
+song_info_by_session table design for question 1:
+	> ![song_info_by_session](images/music_app_history1.PNG)
 
-music_app_history2 table design for questions 2 and 3:
-	> ![music_app_history2](images/music_app_history2.PNG)
+song_info_by_user table design for questions 2:
+	> ![song_info_by_user](images/music_app_history2.PNG)
 
+user_info_by_song table design for questions 3:
+	> ![user_info_by_song](images/music_app_history3.PNG)
 
 ## ETL Pipeline
 Scripts were created and added to the queries.py file to create table, insert data and delete table.
