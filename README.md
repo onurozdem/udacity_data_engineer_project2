@@ -28,7 +28,7 @@ song_info_by_user table design for questions 2:
 	> ![song_info_by_user](images/music_app_history2.PNG)
 
 user_info_by_song table design for questions 3:
-	> ![user_info_by_song](images/music_app_history3.PNG)
+	> ![user_info_by_song](images/music_app_history3_2.PNG)
 
 ## Queries
 The queries that meet the questions are as follows:
