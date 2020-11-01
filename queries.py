@@ -33,11 +33,9 @@ create_song_info_by_user = create_song_info_by_user + """(user_id int,
 create_user_info_by_song = "CREATE TABLE IF NOT EXISTS user_info_by_song "
 create_user_info_by_song = create_user_info_by_song + """(song_title text, 
                                                           user_id int,
-                                                          session_id int,
-                                                          item_in_session int,
                                                           first_name text, 
                                                           last_name text,
-                                                          PRIMARY KEY (song_title, user_id, session_id, item_in_session))"""
+                                                          PRIMARY KEY (song_title, user_id))"""
 
 # INSERT QUERIES
 insert_song_info_by_session = """INSERT INTO song_info_by_session (session_id,
@@ -58,11 +56,9 @@ insert_song_info_by_user = insert_song_info_by_user + " VALUES (%s, %s, %s, %s, 
 
 insert_user_info_by_song = """INSERT INTO user_info_by_song (song_title,
                                                              user_id,
-                                                             session_id,
-                                                             item_in_session,
                                                              first_name, 
                                                              last_name)"""
-insert_user_info_by_song = insert_user_info_by_song + " VALUES (%s, %s, %s, %s, %s, %s)"
+insert_user_info_by_song = insert_user_info_by_song + " VALUES (%s, %s, %s, %s)"
 
 # SELECT QUERIES
 
